@@ -1,13 +1,23 @@
 import React from 'react';
 
-import { GlobalStyle } from '../style';
+import Logo from './Logo';
+
+import { GlobalStyle, Card, Title, Text, Button } from '../style';
 
 const Login = () => {
   return (
-    <div>
+    <React.Fragment>
       <GlobalStyle />
-      <h1>Login Component</h1>
-    </div>
+      <Card>
+        <Logo />
+        <Title>Sign in</Title>
+        <Text margin="0 0 1.5em 0">
+          Sign in using your Google account to get quick access to your book
+          store.
+        </Text>
+        <Button>Google</Button>
+      </Card>
+    </React.Fragment>
   );
 };
 
