@@ -4,6 +4,8 @@ import Logo from './Logo';
 
 import { GlobalStyle, Card, Title, Text, Button } from '../style';
 
+import { signInWithGoogle } from '../firebase';
+
 const Login = () => {
   return (
     <React.Fragment>
@@ -15,7 +17,7 @@ const Login = () => {
           Sign in using your Google account to get quick access to your book
           store.
         </Text>
-        <Button>Google</Button>
+        <Button onClick={signInWithGoogle}>Google</Button>
       </Card>
     </React.Fragment>
   );
