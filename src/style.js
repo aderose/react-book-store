@@ -6,13 +6,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Lato', roboto, sans-serif;
+    // border: 1px solid red;
   }
 
   :root {
     --primary-color: #3f2b96;
     --secondary-color: #766f8f;
     --dark: #333;
-    --light: #eee;
+    --light: #efefef;
   }
 
   html {
@@ -52,17 +53,18 @@ export const Title = styled.h1`
 
 export const Text = styled.p`
   margin: ${({ margin }) => margin};
+  font-size: 1.25em;
 `;
 
 export const LogoContainer = styled.div`
-  font-size: 2em;
+  font-size: 1.45em;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary-color);
 
-  @media (min-width: 500px) {
-    font-size: 3em;
+  @media (min-width: 750px) {
+    font-size: 2.5em;
   }
 `;
 
@@ -83,5 +85,57 @@ export const Button = styled.button`
 
   :focus {
     outline: none;
+  }
+`;
+
+export const Header = styled.nav`
+  background-color: var(--light);
+  padding: 0.75em;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 750px) {
+    padding: 0.75em 5em;
+  }
+`;
+
+export const Image = styled.img`
+  width: 2em;
+  border-radius: 50%;
+
+  @media (min-width: 750px) {
+    width: 3em;
+  }
+`;
+
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+  position: relative;
+  user-select: none;
+
+  :hover {
+    background-color: #ccc;
+  }
+
+  @media (min-width: 750px) {
+    border-radius: 10px;
+    padding: 0.3em 0.75em;
+    border: 1px solid #ccc;
+  }
+`;
+
+export const FlexibleText = styled.p`
+  margin: ${({ margin }) => margin};
+  font-size: ${({ size }) => size};
+  display: none;
+
+  @media (min-width: 750px) {
+    display: flex;
   }
 `;
