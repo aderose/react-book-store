@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { GlobalStyle } from '../style';
+import Logo from './Logo';
+import Profile from './Profile';
+
+import { GlobalStyle, Header } from '../style';
+
+import { UserContext } from '../providers/UserProvider';
 
 const Home = () => {
+  const user = useContext(UserContext);
+  const { photoURL, displayName } = user;
+  console.log(user.photoURL);
   return (
     <React.Fragment>
       <GlobalStyle />
-      <h1>Home Component</h1>
+      <Header>
+        <Logo />
+        <Profile iconSrc={photoURL} name={displayName} />
+      </Header>
     </React.Fragment>
   );
 };
