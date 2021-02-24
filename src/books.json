@@ -1,0 +1,55 @@
+{
+  "bought": [
+    {
+      "id": 0,
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "price": "£5.00",
+      "isRead": true
+    },
+    {
+      "id": 1,
+      "title": "Harry Potter and the Chamber of Secrets",
+      "author": "J.K. Rowling",
+      "price": "£4.00",
+      "isRead": false
+    },
+    {
+      "id": 2,
+      "title": "Harry Potter the the Prisoner of Azkaban",
+      "author": "J.K. Rowling",
+      "price": "£4.00",
+      "isRead": false
+    }
+  ],
+  "notBought": [
+    {
+      "id": 3,
+      "title": "Harry Potter and the Goblet of Fire",
+      "author": "J.K. Rowling",
+      "price": "£4.00",
+      "isRead": true
+    },
+    {
+      "id": 4,
+      "title": "Harry Potter and the Order of the Phoenix",
+      "author": "J.K. Rowling",
+      "price": "£5.00",
+      "isRead": false
+    },
+    {
+      "id": 5,
+      "title": "Harry Potter and the Half-Blood Prince",
+      "author": "J.K. Rowling",
+      "price": "£5.00",
+      "isRead": false
+    },
+    {
+      "id": 6,
+      "title": "Harry Potter and the Deathly Hallows",
+      "author": "J.K. Rowling",
+      "price": "£5.00",
+      "isRead": false
+    }
+  ]
+}
