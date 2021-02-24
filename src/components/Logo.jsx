@@ -7,9 +7,9 @@ import { LogoContainer, Text } from '../style';
 const Logo = () => {
   return (
     <LogoContainer>
-      <Text margin="0 0.2em 0 0">Book</Text>
+      <Text margin="0 0.2em 0 0">book</Text>
       <FontAwesomeIcon icon="book-open" />
-      <Text margin="0 0 0 0.2em">Store</Text>
+      <Text margin="0 0 0 0.2em">store</Text>
     </LogoContainer>
   );
 };
