@@ -1,16 +1,14 @@
 import React from 'react';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
-import FontAwesomeIcon from '../fontAwesome';
-
-import { LogoContainer, Text } from '../style';
-
-const Logo = () => {
+const Logo = ({ color }) => {
   return (
-    <LogoContainer>
-      <Text margin="0 0.2em 0 0">book</Text>
-      <FontAwesomeIcon icon="book-open" />
-      <Text margin="0 0 0 0.2em">store</Text>
-    </LogoContainer>
+    <MenuBookIcon
+      style={{
+        fontSize: '100px',
+        color: color,
+      }}
+    />
   );
 };
 

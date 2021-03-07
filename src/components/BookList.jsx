@@ -1,25 +1,20 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
+
+import { TransparentPaper } from '../styles';
 
 import Book from './Book';
 
-import { ListContainer } from '../style';
-
-const BookList = ({ content, books }) => {
+const BookList = ({ books }) => {
   return (
-    <ListContainer content={content}>
-      {books.map((book) => (
-        <Book key={book.id} book={book} />
-      ))}
-      <Book
-        book={{
-          id: 'DUMMY',
-          title: 'DUMMY',
-          author: 'DUMMY',
-          price: 'DUMMY',
-          isRead: false,
-        }}
-      />
-    </ListContainer>
+    <Container maxWidth="md">
+      <TransparentPaper elevation={0} square>
+        {books.map((book) => (
+          <Book key={book.id} book={book} />
+        ))}
+        <Book book={{ id: 'DUMMY' }} />
+      </TransparentPaper>
+    </Container>
   );
 };
 
