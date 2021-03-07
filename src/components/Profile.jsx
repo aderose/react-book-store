@@ -1,32 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useRef } from 'react';
+import Typography from '@material-ui/core/Typography';
+import Fade from '@material-ui/core/Fade';
+import Popper from '@material-ui/core/Popper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Box from '@material-ui/core/Box';
 
-import FontAwesomeIcon from '../fontAwesome';
-
-import { ProfileContainer, Image, FlexibleText, LogoContainer } from '../style';
-
+import { StyledProfileCard, ProfileIcon } from '../styles';
+import { UserContext } from '../providers/UserProvider';
 import { signOut } from '../firebase';
 
-const Profile = ({ name, iconSrc }) => {
-  const [isLogout, setIsLogout] = useState(false);
+const Profile = () => {
+  const { displayName, email } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
-  const handleClick = () => {
-    if (isLogout) signOut();
-    setIsLogout(true);
+  const handleToggle = () => setOpen((prevOpen) => !prevOpen);
+
+  const handleClose = (event) => {
+    // if click occurs on anchor, prevent rapid open & close
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
-    <ProfileContainer onClick={handleClick}>
-      {!isLogout ? (
-        <Image src={iconSrc} alt="User Icon" />
-      ) : (
-        <LogoContainer>
-          <FontAwesomeIcon icon="sign-out-alt" />
-        </LogoContainer>
-      )}
-      <FlexibleText margin="0 0 0 0.5em" size="1.25em">
-        {!isLogout ? name : 'Logout'}
-      </FlexibleText>
-    </ProfileContainer>
+    <React.Fragment>
+      <ProfileIcon type="button" ref={anchorRef} onClick={handleToggle}>
+        {displayName.split(' ').reduce((str, word) => str + word[0], '')}
+      </ProfileIcon>
+      <Popper open={open} anchorEl={anchorRef.current} transition>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps}>
+            <Box>
+              <ClickAwayListener onClickAway={handleClose}>
+                <StyledProfileCard elevation={5}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2" gutterBottom>
+                      {displayName}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {email}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button onClick={signOut}>Sign Out</Button>
+                  </CardActions>
+                </StyledProfileCard>
+              </ClickAwayListener>
+            </Box>
+          </Fade>
+        )}
+      </Popper>
+    </React.Fragment>
   );
 };
 
