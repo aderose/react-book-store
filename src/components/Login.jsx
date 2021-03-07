@@ -1,25 +1,32 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
-import Logo from './Logo';
-
-import { GlobalStyle, Card, Title, Text, Button } from '../style';
+import { Logo, LoginCard, LoginCardContent, LoginButton } from '../styles';
 
 import { signInWithGoogle } from '../firebase';
 
 const Login = () => {
   return (
-    <React.Fragment>
-      <GlobalStyle />
-      <Card>
-        <Logo />
-        <Title>Sign in</Title>
-        <Text margin="0 0 1.5em 0">
-          Sign in using your Google account to get quick access to your book
-          store.
-        </Text>
-        <Button onClick={signInWithGoogle}>Google</Button>
-      </Card>
-    </React.Fragment>
+    <LoginCard elevation={5}>
+      <LoginCardContent>
+        <Logo size={96} />
+        <Typography gutterBottom align="center" variant="h4" component="h1">
+          Sign In
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="p"
+          align="center"
+          color="textSecondary"
+        >
+          Sign in using a Google account to get quick access to your book store.
+        </Typography>
+        <LoginButton onClick={signInWithGoogle}>
+          Proceed With Google
+        </LoginButton>
+      </LoginCardContent>
+    </LoginCard>
   );
 };
 
