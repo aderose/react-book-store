@@ -19,7 +19,7 @@ const createBookListManager = () => {
 
   const updateBook = (id, property, value) => {
     const book = bookList.find((book) => book.id === id);
-    book[property] = value;
+    if (book) book[property] = value;
   };
 
   const removeBook = (id) => {
