@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 
-import createBookListManager from '../factories/createBookListManager';
+import useBookListManager from '../hooks/useBooksManager';
 
 import { TransparentPaper } from '../styles';
 
 import Book from './Book';
 
 const BookList = () => {
-  const bookListManager = createBookListManager();
-
-  const [bookList, setBookList] = useState(bookListManager.bookList);
+  const { books, initializeBooks } = useBookListManager();
 
   useEffect(() => {
-    bookListManager
-      .populateListFromFirestore()
-      .then((list) => setBookList(list));
+    initializeBooks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Container maxWidth="md">
       <TransparentPaper elevation={0} square>
-        {bookList.map((book, index) => (
+        {books.map((book, index) => (
           <Book key={index} book={book} />
         ))}
         <Book book={{ id: 'DUMMY' }} />
