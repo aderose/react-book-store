@@ -43,7 +43,7 @@ const BookForm = ({ addBook, hideForm }) => {
           if (!values.price) {
             errors.price = 'Required';
           }
-          if (!/^£?\d+(\.\d{1,2})?$/.test(values.price)) {
+          if (!/^£?\d+(\.\d{2})?$/.test(values.price)) {
             errors.price = 'Enter a valid price.';
           }
           return errors;
@@ -53,13 +53,12 @@ const BookForm = ({ addBook, hideForm }) => {
           { setSubmitting },
         ) => {
           setSubmitting(false);
-          addBook(
-            author,
-            title,
-            (/£/.test(price) ? '' : '£') + price,
-            isRead,
-            isBought,
-          );
+
+          const updatedPrice =
+            (/£/.test(price) ? '' : '£') +
+            price +
+            (/\./.test(price) ? '' : '.00');
+          addBook(author, title, updatedPrice, isRead, isBought);
           hideForm();
         }}
       >
