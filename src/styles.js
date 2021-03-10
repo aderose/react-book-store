@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
+import Box from '@material-ui/core/Box';
 import CardHeader from '@material-ui/core/CardHeader';
 
 export const cssVariables = {
@@ -144,6 +145,30 @@ export const StyledCard = withStyles({
   },
 })(Card);
 
+export const DummyCard = withStyles({
+  root: {
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
+    border: `3px dashed rgba(255, 255, 255, 0.3)`,
+    color: 'rgba(255, 255, 255, 0.7)',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px',
+    margin: 10,
+    width: '100%',
+    maxWidth: 350,
+    userSelect: 'none',
+    [theme.breakpoints.up('sm')]: {
+      width: '40%',
+    },
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.05)',
+    },
+  },
+})(Card);
+
 export const StyledCardHeader = withStyles({
   root: {
     paddingBottom: 0,
@@ -209,3 +234,81 @@ export const BoughtChip = withStyles({
     fontSize: 14,
   },
 })(Chip);
+
+// Form styling
+
+export const FormBackground = withStyles({
+  root: {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '100%',
+    borderRadius: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})(Paper);
+
+export const FormContainer = withStyles({
+  root: {
+    width: '80%',
+    maxWidth: 400,
+    padding: '1em',
+    '& form': {
+      '& div': {
+        width: '100%',
+        marginBottom: 10,
+      },
+    },
+  },
+})(Paper);
+
+export const FormSubmitButton = withStyles({
+  root: {
+    backgroundColor: cssVariables.primary,
+    border: `2px solid ${cssVariables.primary}`,
+    marginBottom: 10,
+    '&:hover': {
+      backgroundColor: cssVariables.tertiary,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: 0,
+      padding: '0.5em 2em',
+    },
+  },
+  label: {
+    color: theme.palette.getContrastText(cssVariables.primary),
+  },
+})(Button);
+
+export const FormCancelButton = withStyles({
+  root: {
+    backgroundColor: 'transparent',
+    border: `2px solid ${cssVariables.primary}`,
+    '&:hover': {
+      backgroundColor: '#cdc1f5',
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: '0.5em 2em',
+    },
+  },
+  label: {
+    color: cssVariables.primary,
+  },
+})(Button);
+
+export const ActionButtons = withStyles({
+  root: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+  },
+})(Box);
