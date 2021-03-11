@@ -46,7 +46,7 @@ export const signOut = () => {
 };
 
 export const addBookToFirestore = async (book) => {
-  return await firestore
+  const docRef = await firestore
     .collection('users')
     .doc(auth.currentUser.uid)
     .collection('books')
@@ -59,6 +59,7 @@ export const addBookToFirestore = async (book) => {
     .catch((e) => {
       console.error('Error writing new book to database', e);
     });
+  return docRef.id;
 };
 
 export const getBooksFromFirestore = async () => {
