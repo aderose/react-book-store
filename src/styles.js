@@ -237,25 +237,14 @@ export const BoughtChip = withStyles({
 
 // Form styling
 
-export const FormBackground = withStyles({
-  root: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '100%',
-    borderRadius: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})(Paper);
-
 export const FormContainer = withStyles({
   root: {
+    backgroundColor: cssVariables.light,
     width: '80%',
+    margin: 'auto',
+    marginTop: 50,
     maxWidth: 400,
+    minWidth: 200,
     padding: '1em',
     '& form': {
       '& div': {
@@ -265,6 +254,19 @@ export const FormContainer = withStyles({
     },
   },
 })(Paper);
+
+export const ActionButtons = withStyles({
+  root: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+  },
+})(Box);
 
 export const FormSubmitButton = withStyles({
   root: {
@@ -299,16 +301,3 @@ export const FormCancelButton = withStyles({
     color: cssVariables.primary,
   },
 })(Button);
-
-export const ActionButtons = withStyles({
-  root: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-  },
-})(Box);

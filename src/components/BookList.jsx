@@ -26,19 +26,22 @@ const BookList = () => {
   return (
     <React.Fragment>
       <Container maxWidth="md">
-        <TransparentPaper elevation={0} square>
-          <DummyCard type="button" onClick={toggleForm}>
-            <AddIcon />
-            <Typography variant="h5" component="p">
-              Add Book
-            </Typography>
-          </DummyCard>
-          {books.map((book, index) => (
-            <Book key={index} book={book} />
-          ))}
-        </TransparentPaper>
+        {formActive ? (
+          <BookForm addBook={addBook} hideForm={toggleForm} />
+        ) : (
+          <TransparentPaper elevation={0} square>
+            <DummyCard type="button" onClick={toggleForm}>
+              <AddIcon />
+              <Typography variant="h5" component="p">
+                Add Book
+              </Typography>
+            </DummyCard>
+            {books.map((book, index) => (
+              <Book key={index} book={book} />
+            ))}
+          </TransparentPaper>
+        )}
       </Container>
-      {formActive && <BookForm addBook={addBook} hideForm={toggleForm} />}
     </React.Fragment>
   );
 };
