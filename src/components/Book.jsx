@@ -23,9 +23,8 @@ import {
   StyledCardContent,
 } from '../styles';
 
-const Book = ({ book }) => {
-  const [isRead, setIsRead] = useState(book.isRead);
-  const [isBought, setIsBought] = useState(book.isBought);
+const Book = ({ book, updateBook }) => {
+  // const [isBought, setIsBought] = useState(book.isBought);
   const [menuOpen, setMenuOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -42,12 +41,13 @@ const Book = ({ book }) => {
   };
 
   const switchReadStatus = (event) => {
-    setIsRead((prevRead) => !prevRead);
+    updateBook(book.id, 'isRead', !book.isRead);
     handleClose(event);
   };
 
   const switchBoughtStatus = (event) => {
-    setIsBought((prevBought) => !prevBought);
+    updateBook(book.id, 'isBought', !book.isBought);
+    // setIsBought((prevBought) => !prevBought);
     handleClose(event);
   };
 
@@ -75,14 +75,14 @@ const Book = ({ book }) => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList>
+                  <MenuItem onClick={switchReadStatus}>
+                    Mark As {book.isRead ? 'Unread' : 'Read'}
+                  </MenuItem>
+                  <MenuItem onClick={switchBoughtStatus}>
+                    Mark as {book.isBought ? 'Not Bought' : 'Bought'}
+                  </MenuItem>
                   <MenuItem onClick={handleEdit}>Edit Book</MenuItem>
                   <MenuItem onClick={handleDelete}>Delete Book</MenuItem>
-                  <MenuItem onClick={switchBoughtStatus}>
-                    Mark as {isBought ? 'Not Bought' : 'Bought'}
-                  </MenuItem>
-                  <MenuItem onClick={switchReadStatus}>
-                    Mark As {isRead ? 'Unread' : 'Read'}
-                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
@@ -103,7 +103,7 @@ const Book = ({ book }) => {
             label={book.price}
           />
         )}
-        {isRead && (
+        {book.isRead && (
           <ReadChip
             avatar={
               <Avatar>
@@ -113,7 +113,7 @@ const Book = ({ book }) => {
             label="Read"
           />
         )}
-        {isBought && (
+        {book.isBought && (
           <BoughtChip
             avatar={
               <Avatar>
