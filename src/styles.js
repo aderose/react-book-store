@@ -194,6 +194,7 @@ export const PriceChip = withStyles({
       },
     },
     marginRight: 5,
+    marginBottom: 2,
   },
   label: {
     color: theme.palette.getContrastText(cssVariables.primary),
@@ -211,6 +212,7 @@ export const ReadChip = withStyles({
       },
     },
     marginRight: 5,
+    marginBottom: 2,
   },
   label: {
     color: '#ffffff',
@@ -228,6 +230,7 @@ export const BoughtChip = withStyles({
       },
     },
     marginRight: 5,
+    marginBottom: 2,
   },
   label: {
     color: '#ffffff',
