@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { DummyCard, TransparentPaper } from '../styles';
 
-import useBookListManager from '../hooks/useBooksManager';
+import useBooksManager from '../hooks/useBooksManager';
 
 import AddIcon from '@material-ui/icons/Add';
 
@@ -11,7 +11,7 @@ import BookForm from './BookForm';
 import Book from './Book';
 
 const BookList = () => {
-  const { books, initializeBooks, addBook } = useBookListManager();
+  const { books, initializeBooks, addBook, updateBook } = useBooksManager();
   const [formActive, setFormActive] = useState(false);
 
   useEffect(() => {
@@ -24,25 +24,23 @@ const BookList = () => {
   };
 
   return (
-    <React.Fragment>
-      <Container maxWidth="md">
-        {formActive ? (
-          <BookForm addBook={addBook} hideForm={toggleForm} />
-        ) : (
-          <TransparentPaper elevation={0} square>
-            <DummyCard type="button" onClick={toggleForm}>
-              <AddIcon />
-              <Typography variant="h5" component="p">
-                Add Book
-              </Typography>
-            </DummyCard>
-            {books.map((book, index) => (
-              <Book key={index} book={book} />
-            ))}
-          </TransparentPaper>
-        )}
-      </Container>
-    </React.Fragment>
+    <Container maxWidth="md">
+      {formActive ? (
+        <BookForm addBook={addBook} hideForm={toggleForm} />
+      ) : (
+        <TransparentPaper elevation={0} square>
+          <DummyCard type="button" onClick={toggleForm}>
+            <AddIcon />
+            <Typography variant="h5" component="p">
+              Add Book
+            </Typography>
+          </DummyCard>
+          {books.map((book) => (
+            <Book key={book.id} book={book} updateBook={updateBook} />
+          ))}
+        </TransparentPaper>
+      )}
+    </Container>
   );
 };
 
