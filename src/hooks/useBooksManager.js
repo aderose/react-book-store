@@ -2,7 +2,11 @@ import { useState } from 'react';
 
 // import createBook from './createBook';
 
-import { addBookToFirestore, getBooksFromFirestore } from '../firebase';
+import {
+  addBookToFirestore,
+  getBooksFromFirestore,
+  updateBookInFirestore,
+} from '../firebase';
 
 const useBooksManager = () => {
   const [books, setBooks] = useState([]);
@@ -22,8 +26,15 @@ const useBooksManager = () => {
   };
 
   const updateBook = (id, property, value) => {
-    const book = books.find((book) => book.id === id);
-    if (book) book[property] = value;
+    updateBookInFirestore(id, property, value);
+
+    // change book property without changing order of books
+    setBooks((prevBooks) => {
+      const tempBooks = [...prevBooks];
+      const index = tempBooks.map((book) => book.id).indexOf(id);
+      tempBooks[index][property] = value;
+      return tempBooks;
+    });
   };
 
   const removeBook = (id) => {
@@ -31,8 +42,7 @@ const useBooksManager = () => {
   };
 
   const initializeBooks = async () => {
-    const books = await getBooksFromFirestore();
-    setBooks(books);
+    setBooks(await getBooksFromFirestore());
   };
 
   return {
