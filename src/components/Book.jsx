@@ -24,7 +24,6 @@ import {
 } from '../styles';
 
 const Book = ({ book, updateBook }) => {
-  // const [isBought, setIsBought] = useState(book.isBought);
   const [menuOpen, setMenuOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -47,7 +46,6 @@ const Book = ({ book, updateBook }) => {
 
   const switchBoughtStatus = (event) => {
     updateBook(book.id, 'isBought', !book.isBought);
-    // setIsBought((prevBought) => !prevBought);
     handleClose(event);
   };
 
