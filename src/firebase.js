@@ -87,7 +87,7 @@ export const getBooksFromFirestore = async () => {
     });
 };
 
-export const updateBookInFirestore = (id, property, value) => {
+export const updateBookPropertyInFirestore = (id, property, value) => {
   firestore
     .collection('users')
     .doc(auth.currentUser.uid)

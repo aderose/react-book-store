@@ -11,7 +11,12 @@ import BookForm from './BookForm';
 import Book from './Book';
 
 const BookList = () => {
-  const { books, initializeBooks, addBook, updateBook } = useBooksManager();
+  const {
+    books,
+    initializeBooks,
+    addBook,
+    updateBookProperty,
+  } = useBooksManager();
   const [formActive, setFormActive] = useState(false);
 
   useEffect(() => {
@@ -36,7 +41,11 @@ const BookList = () => {
             </Typography>
           </DummyCard>
           {books.map((book) => (
-            <Book key={book.id} book={book} updateBook={updateBook} />
+            <Book
+              key={book.id}
+              book={book}
+              updateBookProperty={updateBookProperty}
+            />
           ))}
         </TransparentPaper>
       )}

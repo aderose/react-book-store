@@ -23,7 +23,7 @@ import {
   StyledCardContent,
 } from '../styles';
 
-const Book = ({ book, updateBook }) => {
+const Book = ({ book, updateBookProperty }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -40,12 +40,12 @@ const Book = ({ book, updateBook }) => {
   };
 
   const switchReadStatus = (event) => {
-    updateBook(book.id, 'isRead', !book.isRead);
+    updateBookProperty(book.id, 'isRead', !book.isRead);
     handleClose(event);
   };
 
   const switchBoughtStatus = (event) => {
-    updateBook(book.id, 'isBought', !book.isBought);
+    updateBookProperty(book.id, 'isBought', !book.isBought);
     handleClose(event);
   };
 

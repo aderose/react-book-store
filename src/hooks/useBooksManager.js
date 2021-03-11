@@ -5,7 +5,7 @@ import { useState } from 'react';
 import {
   addBookToFirestore,
   getBooksFromFirestore,
-  updateBookInFirestore,
+  updateBookPropertyInFirestore,
 } from '../firebase';
 
 const useBooksManager = () => {
@@ -25,8 +25,8 @@ const useBooksManager = () => {
     ]);
   };
 
-  const updateBook = (id, property, value) => {
-    updateBookInFirestore(id, property, value);
+  const updateBookProperty = (id, property, value) => {
+    updateBookPropertyInFirestore(id, property, value);
 
     // change book property without changing order of books
     setBooks((prevBooks) => {
@@ -49,7 +49,7 @@ const useBooksManager = () => {
     books,
     initializeBooks,
     addBook,
-    updateBook,
+    updateBookProperty,
     removeBook,
   };
 };
