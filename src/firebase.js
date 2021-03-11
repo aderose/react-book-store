@@ -85,3 +85,16 @@ export const getBooksFromFirestore = async () => {
       return books;
     });
 };
+
+export const updateBookInFirestore = (id, property, value) => {
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('books')
+    .doc(id)
+    .update({
+      [property]: value,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .catch((e) => console.error(`Error updating book with id: ${id}`, e));
+};
