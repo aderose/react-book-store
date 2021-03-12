@@ -17,6 +17,7 @@ const BookList = () => {
     addBook,
     updateBookProperty,
     updateBook,
+    removeBook,
   } = useBooksManager();
   const [formActive, setFormActive] = useState(false);
   const [editBook, setEditBook] = useState(undefined);
@@ -63,6 +64,7 @@ const BookList = () => {
               book={book}
               updateBookProperty={updateBookProperty}
               showForm={toggleEditForm(book)}
+              removeBook={removeBook}
             />
           ))}
         </TransparentPaper>
