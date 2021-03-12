@@ -15,6 +15,8 @@ import {
 } from '../styles';
 
 const BookForm = ({ addBook, updateBook, hideForm, editBook }) => {
+  console.log(editBook);
+
   return (
     <Formik
       initialValues={{
@@ -57,7 +59,7 @@ const BookForm = ({ addBook, updateBook, hideForm, editBook }) => {
           price +
           (/\./.test(price) ? '' : '.00');
         if (editBook === undefined) {
-          // we are not updating a book
+          // we are adding a book
           addBook(author, title, updatedPrice, isRead, isBought);
         } else {
           // we are updating a book
@@ -76,7 +78,7 @@ const BookForm = ({ addBook, updateBook, hideForm, editBook }) => {
       {({ submitForm, isSubmitting }) => (
         <FormContainer>
           <Typography variant="h5" component="h1" gutterBottom>
-            Add New Book
+            {editBook === undefined ? 'Add New' : 'Edit'} Book
           </Typography>
           <Form>
             <Field
