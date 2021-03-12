@@ -99,3 +99,27 @@ export const updateBookPropertyInFirestore = (id, property, value) => {
     })
     .catch((e) => console.error(`Error updating book with id: ${id}`, e));
 };
+
+export const updateBookInFirestore = ({
+  id,
+  author,
+  title,
+  price,
+  isRead,
+  isBought,
+}) => {
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('books')
+    .doc(id)
+    .update({
+      author,
+      title,
+      price,
+      isRead,
+      isBought,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .catch((e) => console.error(`Error updating book with id: ${id}`, e));
+};
