@@ -7,6 +7,7 @@ import {
   getBooksFromFirestore,
   updateBookPropertyInFirestore,
   updateBookInFirestore,
+  removeBookFromFirestore,
 } from '../firebase';
 
 const useBooksManager = () => {
@@ -49,6 +50,7 @@ const useBooksManager = () => {
   };
 
   const removeBook = (id) => {
+    removeBookFromFirestore(id);
     setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
   };
 
