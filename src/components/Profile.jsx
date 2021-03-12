@@ -31,7 +31,7 @@ const Profile = () => {
   return (
     <React.Fragment>
       <ProfileIcon type="button" ref={anchorRef} onClick={handleToggle}>
-        {displayName.split(' ').reduce((str, word) => str + word[0], '')}
+        {displayName[0].toUpperCase()}
       </ProfileIcon>
       <Popper open={open} anchorEl={anchorRef.current} transition>
         {({ TransitionProps }) => (
