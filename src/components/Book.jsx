@@ -23,7 +23,7 @@ import {
   StyledCardContent,
 } from '../styles';
 
-const Book = ({ book, updateBookProperty }) => {
+const Book = ({ book, updateBookProperty, showForm }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -51,6 +51,7 @@ const Book = ({ book, updateBookProperty }) => {
 
   const handleEdit = (event) => {
     handleClose(event);
+    showForm();
   };
 
   const handleDelete = (event) => {
