@@ -124,3 +124,13 @@ export const updateBookInFirestore = ({
     })
     .catch((e) => console.error(`Error updating book with id: ${id}`, e));
 };
+
+export const removeBookFromFirestore = (id) => {
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('books')
+    .doc(id)
+    .update({ removed: true })
+    .catch((e) => console.error(`Error removing book with id: ${id}`, e));
+};
