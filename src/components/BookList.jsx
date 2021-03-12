@@ -16,8 +16,10 @@ const BookList = () => {
     initializeBooks,
     addBook,
     updateBookProperty,
+    updateBook,
   } = useBooksManager();
   const [formActive, setFormActive] = useState(false);
+  const [editBook, setEditBook] = useState(undefined);
 
   useEffect(() => {
     initializeBooks();
@@ -28,10 +30,25 @@ const BookList = () => {
     setFormActive((prevStatus) => !prevStatus);
   };
 
+  const toggleEditForm = (book) => () => {
+    setEditBook(book);
+    toggleForm();
+  };
+
+  const hideForm = () => {
+    setEditBook(undefined);
+    toggleForm();
+  };
+
   return (
     <Container maxWidth="md">
       {formActive ? (
-        <BookForm addBook={addBook} hideForm={toggleForm} />
+        <BookForm
+          addBook={addBook}
+          updateBook={updateBook}
+          hideForm={hideForm}
+          editBook={editBook}
+        />
       ) : (
         <TransparentPaper elevation={0} square>
           <DummyCard type="button" onClick={toggleForm}>
@@ -45,6 +62,7 @@ const BookList = () => {
               key={book.id}
               book={book}
               updateBookProperty={updateBookProperty}
+              showForm={toggleEditForm(book)}
             />
           ))}
         </TransparentPaper>
