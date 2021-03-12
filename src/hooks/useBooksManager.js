@@ -6,6 +6,7 @@ import {
   addBookToFirestore,
   getBooksFromFirestore,
   updateBookPropertyInFirestore,
+  updateBookInFirestore,
 } from '../firebase';
 
 const useBooksManager = () => {
@@ -37,6 +38,16 @@ const useBooksManager = () => {
     });
   };
 
+  const updateBook = (book) => {
+    updateBookInFirestore(book);
+    setBooks((prevBooks) => {
+      const tempBooks = [...prevBooks];
+      const index = tempBooks.map((book) => book.id).indexOf(book.id);
+      tempBooks[index] = { ...tempBooks[index], ...book };
+      return tempBooks;
+    });
+  };
+
   const removeBook = (id) => {
     setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
   };
@@ -50,6 +61,7 @@ const useBooksManager = () => {
     initializeBooks,
     addBook,
     updateBookProperty,
+    updateBook,
     removeBook,
   };
 };
