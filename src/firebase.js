@@ -56,6 +56,7 @@ export const addBookToFirestore = async (book) => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
+    .then((docRef) => docRef.id)
     .catch((e) => {
       console.error('Error writing new book to database', e);
     });
@@ -87,7 +88,7 @@ export const getBooksFromFirestore = async () => {
     });
 };
 
-export const updateBookInFirestore = (id, property, value) => {
+export const updateBookPropertyInFirestore = (id, property, value) => {
   firestore
     .collection('users')
     .doc(auth.currentUser.uid)
@@ -95,6 +96,30 @@ export const updateBookInFirestore = (id, property, value) => {
     .doc(id)
     .update({
       [property]: value,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .catch((e) => console.error(`Error updating book with id: ${id}`, e));
+};
+
+export const updateBookInFirestore = ({
+  id,
+  author,
+  title,
+  price,
+  isRead,
+  isBought,
+}) => {
+  firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('books')
+    .doc(id)
+    .update({
+      author,
+      title,
+      price,
+      isRead,
+      isBought,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .catch((e) => console.error(`Error updating book with id: ${id}`, e));

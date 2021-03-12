@@ -5,14 +5,15 @@ import { useState } from 'react';
 import {
   addBookToFirestore,
   getBooksFromFirestore,
+  updateBookPropertyInFirestore,
   updateBookInFirestore,
 } from '../firebase';
 
 const useBooksManager = () => {
   const [books, setBooks] = useState([]);
 
-  const addBook = (author, title, price, isRead, isBought) => {
-    const id = addBookToFirestore({
+  const addBook = async (author, title, price, isRead, isBought) => {
+    const id = await addBookToFirestore({
       author,
       title,
       price,
@@ -25,14 +26,24 @@ const useBooksManager = () => {
     ]);
   };
 
-  const updateBook = (id, property, value) => {
-    updateBookInFirestore(id, property, value);
+  const updateBookProperty = (id, property, value) => {
+    updateBookPropertyInFirestore(id, property, value);
 
     // change book property without changing order of books
     setBooks((prevBooks) => {
       const tempBooks = [...prevBooks];
       const index = tempBooks.map((book) => book.id).indexOf(id);
       tempBooks[index][property] = value;
+      return tempBooks;
+    });
+  };
+
+  const updateBook = (book) => {
+    updateBookInFirestore(book);
+    setBooks((prevBooks) => {
+      const tempBooks = [...prevBooks];
+      const index = tempBooks.map((book) => book.id).indexOf(book.id);
+      tempBooks[index] = { ...tempBooks[index], ...book };
       return tempBooks;
     });
   };
@@ -49,6 +60,7 @@ const useBooksManager = () => {
     books,
     initializeBooks,
     addBook,
+    updateBookProperty,
     updateBook,
     removeBook,
   };
