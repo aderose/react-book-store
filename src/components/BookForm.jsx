@@ -14,15 +14,15 @@ import {
   ActionButtons,
 } from '../styles';
 
-const BookForm = ({ addBook, hideForm }) => {
+const BookForm = ({ addBook, updateBook, hideForm, editBook }) => {
   return (
     <Formik
       initialValues={{
-        author: '',
-        title: '',
-        price: '',
-        isRead: false,
-        isBought: false,
+        author: editBook?.author || '',
+        title: editBook?.title || '',
+        price: editBook?.price || '',
+        isRead: editBook?.isRead || false,
+        isBought: editBook?.isBought || false,
       }}
       validate={(values) => {
         const errors = {};
@@ -56,7 +56,20 @@ const BookForm = ({ addBook, hideForm }) => {
           (/£/.test(price) ? '' : '£') +
           price +
           (/\./.test(price) ? '' : '.00');
-        addBook(author, title, updatedPrice, isRead, isBought);
+        if (editBook === undefined) {
+          // we are not updating a book
+          addBook(author, title, updatedPrice, isRead, isBought);
+        } else {
+          // we are updating a book
+          updateBook({
+            id: editBook.id,
+            author,
+            title,
+            price: updatedPrice,
+            isRead,
+            isBought,
+          });
+        }
         hideForm();
       }}
     >
