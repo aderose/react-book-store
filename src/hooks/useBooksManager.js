@@ -12,8 +12,8 @@ import {
 const useBooksManager = () => {
   const [books, setBooks] = useState([]);
 
-  const addBook = (author, title, price, isRead, isBought) => {
-    const id = addBookToFirestore({
+  const addBook = async (author, title, price, isRead, isBought) => {
+    const id = await addBookToFirestore({
       author,
       title,
       price,
