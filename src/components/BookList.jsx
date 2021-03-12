@@ -11,8 +11,15 @@ import BookForm from './BookForm';
 import Book from './Book';
 
 const BookList = () => {
-  const { books, initializeBooks, addBook, updateBook } = useBooksManager();
+  const {
+    books,
+    initializeBooks,
+    addBook,
+    updateBookProperty,
+    updateBook,
+  } = useBooksManager();
   const [formActive, setFormActive] = useState(false);
+  const [editBook, setEditBook] = useState(undefined);
 
   useEffect(() => {
     initializeBooks();
@@ -23,10 +30,25 @@ const BookList = () => {
     setFormActive((prevStatus) => !prevStatus);
   };
 
+  const toggleEditForm = (book) => () => {
+    setEditBook(book);
+    toggleForm();
+  };
+
+  const hideForm = () => {
+    setEditBook(undefined);
+    toggleForm();
+  };
+
   return (
     <Container maxWidth="md">
       {formActive ? (
-        <BookForm addBook={addBook} hideForm={toggleForm} />
+        <BookForm
+          addBook={addBook}
+          updateBook={updateBook}
+          hideForm={hideForm}
+          editBook={editBook}
+        />
       ) : (
         <TransparentPaper elevation={0} square>
           <DummyCard type="button" onClick={toggleForm}>
@@ -36,7 +58,12 @@ const BookList = () => {
             </Typography>
           </DummyCard>
           {books.map((book) => (
-            <Book key={book.id} book={book} updateBook={updateBook} />
+            <Book
+              key={book.id}
+              book={book}
+              updateBookProperty={updateBookProperty}
+              showForm={toggleEditForm(book)}
+            />
           ))}
         </TransparentPaper>
       )}
