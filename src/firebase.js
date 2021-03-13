@@ -22,23 +22,18 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   const credentials = await auth.signInWithPopup(provider);
-  firestore
-    .collection('users')
-    .doc(credentials.user.uid)
-    .get()
-    .then((doc) => {
-      if (!doc.exists) {
-        // create the user document
-        firestore.collection('users').doc(credentials.user.uid).set({
-          displayName: credentials.user.displayName,
-          email: credentials.user.email,
-          photoURL: credentials.user.photoURL,
-        });
+  const doc = firestore.collection('users').doc(credentials.user.uid).get();
 
-        // populate the user document with initial books
-        books.forEach((book) => addBookToFirestore(book));
-      }
+  if (!doc.exists) {
+    await firestore.collection('users').doc(credentials.user.uid).set({
+      displayName: credentials.user.displayName,
+      email: credentials.user.email,
+      photoURL: credentials.user.photoURL,
     });
+
+    // Add each book to firestore
+    await Promise.all(books.map((book) => addBookToFirestore(book)));
+  }
 };
 
 export const signOut = () => {
@@ -56,7 +51,10 @@ export const addBookToFirestore = async (book) => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
-    .then((docRef) => docRef.id)
+    .then((docRef) => {
+      console.log(`Added book: ${book.title}`);
+      return docRef.id;
+    })
     .catch((e) => {
       console.error('Error writing new book to database', e);
     });
