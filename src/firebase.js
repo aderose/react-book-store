@@ -22,7 +22,10 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   const credentials = await auth.signInWithPopup(provider);
-  const doc = firestore.collection('users').doc(credentials.user.uid).get();
+  const doc = await firestore
+    .collection('users')
+    .doc(credentials.user.uid)
+    .get();
 
   if (!doc.exists) {
     await firestore.collection('users').doc(credentials.user.uid).set({
