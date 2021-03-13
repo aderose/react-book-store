@@ -5,8 +5,6 @@ import { DummyCard, TransparentPaper } from '../styles';
 
 import NavBar from './NavBar';
 
-import AddIcon from '@material-ui/icons/Add';
-
 import BookForm from './BookForm';
 import BookList from './BookList';
 
@@ -37,9 +35,8 @@ const Home = () => {
         ) : (
           <TransparentPaper elevation={0} square>
             <DummyCard type="button" onClick={toggleForm}>
-              <AddIcon />
               <Typography variant="h5" component="p">
-                Add Book
+                + Add Book
               </Typography>
             </DummyCard>
             <BookList toggleEditForm={toggleEditForm} />
