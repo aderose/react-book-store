@@ -16,8 +16,8 @@ import {
   ActionButtons,
 } from '../styles';
 
-const BookForm = ({ hideForm, editBook }) => {
-  const { addBook, updateBook } = useBooksManager();
+const BookForm = ({ firebase, hideForm, editBook }) => {
+  const { addBook, updateBook } = useBooksManager(firebase);
 
   return (
     <Formik
