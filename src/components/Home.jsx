@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { DummyCard, TransparentPaper } from '../styles';
 
-import NavBar from './NavBar';
-
 import BookForm from './BookForm';
 import BookList from './BookList';
+import NavBar from './NavBar';
 
-const Home = () => {
+const Home = ({ firebase }) => {
   const [formActive, setFormActive] = useState(false);
   const [editBook, setEditBook] = useState(undefined);
+  const { userInitialised } = firebase;
 
   const toggleForm = () => {
     setFormActive((prevStatus) => !prevStatus);
@@ -31,7 +32,11 @@ const Home = () => {
       <NavBar />
       <Container maxWidth="md">
         {formActive ? (
-          <BookForm hideForm={hideForm} editBook={editBook} />
+          <BookForm
+            firebase={firebase}
+            hideForm={hideForm}
+            editBook={editBook}
+          />
         ) : (
           <TransparentPaper elevation={0} square>
             <DummyCard type="button" onClick={toggleForm}>
@@ -39,7 +44,9 @@ const Home = () => {
                 + Add Book
               </Typography>
             </DummyCard>
-            <BookList toggleEditForm={toggleEditForm} />
+            {userInitialised && (
+              <BookList firebase={firebase} toggleEditForm={toggleEditForm} />
+            )}
           </TransparentPaper>
         )}
       </Container>
