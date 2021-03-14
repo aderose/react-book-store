@@ -10,12 +10,12 @@ import Box from '@material-ui/core/Box';
 
 import { StyledProfileCard, ProfileIcon } from '../styles';
 import { UserContext } from '../providers/UserProvider';
-import { signOut } from '../firebase';
 
-const Profile = () => {
+const Profile = ({ firebase }) => {
   const { displayName, email } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const { signOut } = firebase;
 
   const handleToggle = () => setOpen((prevOpen) => !prevOpen);
 
@@ -31,7 +31,7 @@ const Profile = () => {
   return (
     <React.Fragment>
       <ProfileIcon type="button" ref={anchorRef} onClick={handleToggle}>
-        {displayName.split(' ').reduce((str, word) => str + word[0], '')}
+        {displayName[0].toUpperCase()}
       </ProfileIcon>
       <Popper open={open} anchorEl={anchorRef.current} transition>
         {({ TransitionProps }) => (

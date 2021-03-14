@@ -3,9 +3,9 @@ import Typography from '@material-ui/core/Typography';
 
 import { Logo, LoginCard, LoginCardContent, LoginButton } from '../styles';
 
-import { signInWithGoogle } from '../firebase';
+const Login = ({ firebase }) => {
+  const { signInWithGoogle } = firebase;
 
-const Login = () => {
   return (
     <LoginCard elevation={5}>
       <LoginCardContent>
