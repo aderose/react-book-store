@@ -4,19 +4,16 @@ import useBooksManager from '../hooks/useBooksManager';
 
 import Book from './Book';
 
-const BookList = ({ toggleEditForm }) => {
+const BookList = ({ firebase, toggleEditForm }) => {
   const {
     books,
     initializeBooks,
     updateBookProperty,
     removeBook,
-  } = useBooksManager();
+  } = useBooksManager(firebase);
 
   useEffect(() => {
-    initializeBooks().then(() => {
-      console.log('Got books from Firestore (BookList)');
-      console.log({ booksLength: books.length });
-    });
+    initializeBooks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
