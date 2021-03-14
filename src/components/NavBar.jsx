@@ -5,7 +5,7 @@ import Profile from './Profile';
 
 import { Logo, Nav, Title } from '../styles';
 
-const NavBar = () => {
+const NavBar = ({ firebase }) => {
   return (
     <Nav position="static">
       <Container maxWidth="md">
@@ -14,7 +14,7 @@ const NavBar = () => {
           <Title variant="h5" component="h1">
             Book Store
           </Title>
-          <Profile />
+          <Profile firebase={firebase} />
         </Toolbar>
       </Container>
     </Nav>

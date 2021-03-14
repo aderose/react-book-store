@@ -1,17 +1,14 @@
 import { useState } from 'react';
 
-// import createBook from './createBook';
-
-import {
-  addBookToFirestore,
-  getBooksFromFirestore,
-  updateBookPropertyInFirestore,
-  updateBookInFirestore,
-  removeBookFromFirestore,
-} from '../firebase';
-
-const useBooksManager = () => {
+const useBooksManager = (firebase) => {
   const [books, setBooks] = useState([]);
+  const {
+    addBookToFirestore,
+    updateBookPropertyInFirestore,
+    updateBookInFirestore,
+    removeBookFromFirestore,
+    getBooksFromFirestore,
+  } = firebase;
 
   const addBook = async (author, title, price, isRead, isBought) => {
     const id = await addBookToFirestore({

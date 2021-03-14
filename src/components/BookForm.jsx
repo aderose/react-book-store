@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useBooksManager from '../hooks/useBooksManager';
+
 import { Formik, Form, Field } from 'formik';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,8 +16,8 @@ import {
   ActionButtons,
 } from '../styles';
 
-const BookForm = ({ addBook, updateBook, hideForm, editBook }) => {
-  console.log(editBook);
+const BookForm = ({ firebase, hideForm, editBook }) => {
+  const { addBook, updateBook } = useBooksManager(firebase);
 
   return (
     <Formik
