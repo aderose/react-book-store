@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserContext } from './providers/UserProvider';
 import useFirebase from './hooks/useFirebase';
 
@@ -11,6 +11,15 @@ import { cssVariables, theme } from './styles';
 const Application = () => {
   const user = useContext(UserContext);
   const firebase = useFirebase();
+
+  useEffect(() => {
+    const checkInitialisationStatus = async () => {
+      if (user) {
+        await firebase.updateUserInitialisation();
+      }
+    };
+    checkInitialisationStatus();
+  });
 
   return (
     <ThemeProvider theme={{ ...theme, ...cssVariables }}>
