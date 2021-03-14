@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
     auth.onAuthStateChanged((userAuth) => {
       setUser(userAuth);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
