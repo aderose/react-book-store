@@ -10,12 +10,12 @@ import Box from '@material-ui/core/Box';
 
 import { StyledProfileCard, ProfileIcon } from '../styles';
 import { UserContext } from '../providers/UserProvider';
-import { signOut } from '../firebase';
 
-const Profile = () => {
+const Profile = ({ firebase }) => {
   const { displayName, email } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const { signOut } = firebase;
 
   const handleToggle = () => setOpen((prevOpen) => !prevOpen);
 
