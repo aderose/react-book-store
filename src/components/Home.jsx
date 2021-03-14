@@ -29,7 +29,7 @@ const Home = ({ firebase }) => {
 
   return (
     <React.Fragment>
-      <NavBar />
+      <NavBar firebase={firebase} />
       <Container maxWidth="md">
         {formActive ? (
           <BookForm
