@@ -33,13 +33,13 @@ const BookForm = ({ firebase, hideForm, editBook }) => {
         if (!values.author) {
           errors.author = 'Required';
         }
-        if (!/^[\w'. ]+$/.test(values.author)) {
+        if (!/^[\w'.,/\\ ]+$/.test(values.author)) {
           errors.author = 'Enter a valid author name.';
         }
         if (!values.title) {
           errors.title = 'Required';
         }
-        if (!/^[\w'. ]+$/.test(values.title)) {
+        if (!/^[\w'.,:/\\ ]+$/.test(values.title)) {
           errors.title = 'Enter a valid book title.';
         }
         if (!values.price) {
