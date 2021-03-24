@@ -5,9 +5,6 @@ import useFirebase from './hooks/useFirebase';
 import Home from './components/Home';
 import Login from './components/Login';
 
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import { cssVariables, theme } from './styles';
-
 const Application = () => {
   const user = useContext(UserContext);
   const firebase = useFirebase();
@@ -21,12 +18,7 @@ const Application = () => {
     checkInitialisationStatus();
   });
 
-  return (
-    <ThemeProvider theme={{ ...theme, ...cssVariables }}>
-      <CssBaseline />
-      {user ? <Home firebase={firebase} /> : <Login firebase={firebase} />}
-    </ThemeProvider>
-  );
+  return user ? <Home firebase={firebase} /> : <Login firebase={firebase} />;
 };
 
 export default Application;
