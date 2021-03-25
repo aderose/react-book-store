@@ -75,7 +75,7 @@ const BookForm = ({ firebase, hideForm, defaults }) => {
       await addBook(author, title, updatedPrice, isRead, isBought);
     } else {
       // we are updating a book
-      updateBook({
+      await updateBook({
         id: defaults.id,
         author,
         title,
