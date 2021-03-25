@@ -24,8 +24,8 @@ const useBooksManager = (firebase) => {
     ]);
   };
 
-  const updateBookProperty = (id, property, value) => {
-    updateBookPropertyInFirestore(id, property, value);
+  const updateBookProperty = async (id, property, value) => {
+    await updateBookPropertyInFirestore(id, property, value);
 
     // change book property without changing order of books
     setBooks((prevBooks) => {
@@ -36,8 +36,8 @@ const useBooksManager = (firebase) => {
     });
   };
 
-  const updateBook = (book) => {
-    updateBookInFirestore(book);
+  const updateBook = async (book) => {
+    await updateBookInFirestore(book);
     setBooks((prevBooks) => {
       const tempBooks = [...prevBooks];
       const index = tempBooks.map((book) => book.id).indexOf(book.id);
