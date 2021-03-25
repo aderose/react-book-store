@@ -12,7 +12,7 @@ const Profile = ({ firebase }) => {
   const hidePopup = () => setOpen(false);
 
   return (
-    <React.Fragment>
+    <div className="relative">
       <button
         ref={positionRef}
         className="w-10 h-10 leading-10 text-2xl uppercase text-gray-100 bg-strong-purple hover:bg-purple-800 rounded-full text-center transition duration-200 ease-in"
@@ -36,7 +36,7 @@ const Profile = ({ firebase }) => {
           Sign Out
         </button>
       </FadePopup>
-    </React.Fragment>
+    </div>
   );
 };
 
