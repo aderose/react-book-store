@@ -23,7 +23,7 @@ const BookMenu = ({
   };
 
   return (
-    <React.Fragment>
+    <div className="relative">
       <button
         ref={menuRef}
         onClick={toggleMenu}
@@ -49,7 +49,7 @@ const BookMenu = ({
         show={menuOpen}
         hide={hideMenu}
         parent={menuRef.current}
-        classes="bg-gray-100 rounded shadow-lg z-10 border"
+        classes="w-48 bg-gray-100 rounded shadow-lg z-10 border"
       >
         <ul>
           <li className="transition-colors duration-200 ease-in hover:bg-gray-200">
@@ -86,7 +86,7 @@ const BookMenu = ({
           </li>
         </ul>
       </FadePopup>
-    </React.Fragment>
+    </div>
   );
 };
 

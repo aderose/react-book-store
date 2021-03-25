@@ -1,11 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { WindowListenerContext } from '../providers/WindowListenerProvider';
 
 const FadePopup = ({ id, show, hide, parent, classes, children }) => {
@@ -24,18 +18,6 @@ const FadePopup = ({ id, show, hide, parent, classes, children }) => {
     }
     hide();
   };
-
-  // useLayoutEffect over useEffect to avoid flicker
-  useLayoutEffect(() => {
-    if (shouldRender && parent) {
-      const { bottom, right, width } = parent.getBoundingClientRect();
-      const { width: popupWidth } = popupRef.current.getBoundingClientRect();
-      popupRef.current.setAttribute(
-        'style',
-        `top: ${bottom}px; left: ${right - popupWidth - width / 2}px`,
-      );
-    }
-  });
 
   useEffect(() => {
     if (show) {
@@ -56,7 +38,7 @@ const FadePopup = ({ id, show, hide, parent, classes, children }) => {
     shouldRender && (
       <div
         ref={popupRef}
-        className={`absolute ${
+        className={`absolute right-0 ${
           show ? 'animate-fade-in' : 'animate-fade-out'
         } ${classes}`}
         onAnimationEnd={onAnimationEnd}
