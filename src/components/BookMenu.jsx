@@ -23,7 +23,7 @@ const BookMenu = ({
   };
 
   return (
-    <React.Fragment>
+    <div className="relative">
       <button
         ref={menuRef}
         onClick={toggleMenu}
@@ -86,7 +86,7 @@ const BookMenu = ({
           </li>
         </ul>
       </FadePopup>
-    </React.Fragment>
+    </div>
   );
 };
 
