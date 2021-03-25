@@ -101,8 +101,8 @@ const useFirebase = () => {
       });
   };
 
-  const updateBookPropertyInFirestore = (id, property, value) => {
-    firestore
+  const updateBookPropertyInFirestore = async (id, property, value) => {
+    await firestore
       .collection('users')
       .doc(auth.currentUser.uid)
       .collection('books')
@@ -114,7 +114,7 @@ const useFirebase = () => {
       .catch((e) => console.error(`Error updating book with id: ${id}`, e));
   };
 
-  const updateBookInFirestore = ({
+  const updateBookInFirestore = async ({
     id,
     author,
     title,
@@ -122,7 +122,7 @@ const useFirebase = () => {
     isRead,
     isBought,
   }) => {
-    firestore
+    await firestore
       .collection('users')
       .doc(auth.currentUser.uid)
       .collection('books')
