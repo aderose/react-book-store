@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-custom-font text-gray-900 bg-dim-purple bg-gradient-to-b from-white to-gray-300 bg-blend-multiply bg-no-repeat bg-fixed;
+  }
+  button,
+  input {
+    @apply focus:outline-none;
+  }
+}
+
+@layer utilities {
+  .transition-label {
+    transition-property: color, transform, font-size;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in;
+  }
+  .min-w-xs {
+    min-width: 16rem;
+  }
+}

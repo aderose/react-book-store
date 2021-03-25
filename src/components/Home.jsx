@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { DummyCard, TransparentPaper } from '../styles';
-
+import WindowListenerProvider from '../providers/WindowListenerProvider';
 import BookForm from './BookForm';
 import BookList from './BookList';
 import NavBar from './NavBar';
 
 const Home = ({ firebase }) => {
   const [formActive, setFormActive] = useState(false);
-  const [editBook, setEditBook] = useState(undefined);
+  const [defaults, setDefaults] = useState(undefined);
   const { userInitialised } = firebase;
 
   const toggleForm = () => {
@@ -18,39 +14,40 @@ const Home = ({ firebase }) => {
   };
 
   const toggleEditForm = (book) => () => {
-    setEditBook(book);
+    setDefaults(book);
     toggleForm();
   };
 
   const hideForm = () => {
-    setEditBook(undefined);
+    setDefaults(undefined);
     toggleForm();
   };
 
   return (
-    <React.Fragment>
+    <WindowListenerProvider>
       <NavBar firebase={firebase} />
-      <Container maxWidth="md">
+      <div className="mt-4 w-11/12 max-w-3xl mx-auto flex justify-center flex-wrap">
         {formActive ? (
           <BookForm
             firebase={firebase}
             hideForm={hideForm}
-            editBook={editBook}
+            defaults={defaults}
           />
         ) : (
-          <TransparentPaper elevation={0} square>
-            <DummyCard type="button" onClick={toggleForm}>
-              <Typography variant="h5" component="p">
-                + Add Book
-              </Typography>
-            </DummyCard>
+          <React.Fragment>
+            <button
+              onClick={toggleForm}
+              className="w-56 m-3 text-xl uppercase tracking-wide border-dashed border-4 rounded text-purple-300 border-purple-300 transition-colors duration-200 ease-in hover:bg-black hover:bg-opacity-10"
+            >
+              + Add Book
+            </button>
             {userInitialised && (
               <BookList firebase={firebase} toggleEditForm={toggleEditForm} />
             )}
-          </TransparentPaper>
+          </React.Fragment>
         )}
-      </Container>
-    </React.Fragment>
+      </div>
+    </WindowListenerProvider>
   );
 };
 

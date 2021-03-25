@@ -1,23 +1,16 @@
 import React from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
-import Container from '@material-ui/core/Container';
 import Profile from './Profile';
 
-import { Logo, Nav, Title } from '../styles';
+import Logo from './Logo';
 
 const NavBar = ({ firebase }) => {
   return (
-    <Nav position="static">
-      <Container maxWidth="md">
-        <Toolbar>
-          <Logo size={48} margin="-5px 5px 0 0" />
-          <Title variant="h5" component="h1">
-            Book Store
-          </Title>
-          <Profile firebase={firebase} />
-        </Toolbar>
-      </Container>
-    </Nav>
+    <nav className="bg-gray-100 py-2 shadow-lg">
+      <div className="w-11/12 max-w-3xl mx-auto flex justify-between items-center">
+        <Logo color="text-strong-purple" size="w-12" />
+        <Profile firebase={firebase} />
+      </div>
+    </nav>
   );
 };
 
